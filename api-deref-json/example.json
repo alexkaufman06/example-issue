@@ -1,0 +1,745 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Test Example Example",
+    "description": "Test Example Example API",
+    "version": "1"
+  },
+  "servers": [
+    {
+      "url": "https://api.stage.Test Example.ai",
+      "description": "Stage API"
+    },
+    {
+      "url": "https://api.Test Example.ai",
+      "description": "Production API"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/v2/create/{sensor_id}": {
+      "parameters": [
+        {
+          "name": "sensor_id",
+          "required": true,
+          "schema": {
+            "title": "Sensor ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          "example": "123e4567-e89b-12d3-a456-426614174000",
+          "in": "path"
+        },
+        {
+          "in": "header",
+          "name": "X-Correlation-Id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "The unique identifier for the request.",
+          "example": "864e00cb-fb53-4016-97f1-78e2f07f25d3"
+        },
+        {
+          "in": "header",
+          "name": "X-Tenant-Id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "The unique identifier for the tenant.",
+          "example": "1a618f53-8829-4ab7-b1e4-d4786617e1d0"
+        }
+      ],
+      "post": {
+        "summary": "Request example scan",
+        "tags": [
+          "v2"
+        ],
+        "operationId": "example_api_v2_scan_create_post",
+        "requestBody": {
+          "description": "Request body for create",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "ScanCreateRequest",
+                "required": [
+                  "location"
+                ],
+                "type": "object",
+                "properties": {
+                  "location": {
+                    "title": "POSIX Path",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The resource was successfully created."
+          },
+          "400": {
+            "description": "The request failed due to a client error, with one or more of the following possible causes:\n1. The request required a tenant_id field, which was missing.\n2. The request was malformed syntactically or semantically.\n"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ValidationErrorModel",
+                  "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "loc": {
+                      "title": "Location",
+                      "type": "array",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          }
+                        ]
+                      }
+                    },
+                    "msg": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "type": {
+                      "title": "Error Type",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/create/{sensor_id}": {
+      "parameters": [
+        {
+          "name": "sensor_id",
+          "required": true,
+          "schema": {
+            "title": "Sensor ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          "in": "path",
+          "example": "123e4567-e89b-12d3-a456-426614174000"
+        },
+        {
+          "in": "header",
+          "name": "X-Correlation-Id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "The unique identifier for the request.",
+          "example": "864e00cb-fb53-4016-97f1-78e2f07f25d3"
+        },
+        {
+          "in": "header",
+          "name": "X-Tenant-Id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "The unique identifier for the tenant.",
+          "example": "1a618f53-8829-4ab7-b1e4-d4786617e1d0"
+        }
+      ],
+      "post": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Request example scan",
+        "operationId": "example_api_v1_scan_create_post",
+        "requestBody": {
+          "description": "Request body for create",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "ScanCreateRequest",
+                "required": [
+                  "location"
+                ],
+                "type": "object",
+                "properties": {
+                  "location": {
+                    "title": "POSIX Path",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The resource was successfully created."
+          },
+          "400": {
+            "description": "The request failed due to a client error, with one or more of the following possible causes:\n1. The request required a tenant_id field, which was missing.\n2. The request was malformed syntactically or semantically.\n"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ValidationErrorModel",
+                  "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "loc": {
+                      "title": "Location",
+                      "type": "array",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          }
+                        ]
+                      }
+                    },
+                    "msg": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "type": {
+                      "title": "Error Type",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/status": {
+      "post": {
+        "tags": [
+          "v2"
+        ],
+        "summary": "Batch request status",
+        "operationId": "example_api_v2_batch_status",
+        "requestBody": {
+          "description": "Request for multiple sensorIds",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The resource was successfully created."
+          },
+          "400": {
+            "description": "The request failed due to a client error, with one or more of the following possible causes:\n1. The request required a tenant_id field, which was missing.\n2. The request was malformed syntactically or semantically.\n"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ValidationErrorModel",
+                  "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "loc": {
+                      "title": "Location",
+                      "type": "array",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          }
+                        ]
+                      }
+                    },
+                    "msg": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "type": {
+                      "title": "Error Type",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/status/{sensor_id}": {
+      "parameters": [
+        {
+          "name": "sensor_id",
+          "required": true,
+          "schema": {
+            "title": "Sensor ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          "in": "path",
+          "example": "123e4567-e89b-12d3-a456-426614174000"
+        },
+        {
+          "in": "header",
+          "name": "X-Correlation-Id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "The unique identifier for the request.",
+          "example": "864e00cb-fb53-4016-97f1-78e2f07f25d3"
+        },
+        {
+          "in": "header",
+          "name": "X-Tenant-Id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "The unique identifier for the tenant.",
+          "example": "1a618f53-8829-4ab7-b1e4-d4786617e1d0"
+        }
+      ],
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "summary": "Get Status or Result of a Scan",
+        "operationId": "example_api_v1_sensors_sensor_id_get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "title": "Example V2 Response",
+                    "required": [
+                      "scan_id",
+                      "status",
+                      "start_time",
+                      "end_time",
+                      "results",
+                      "detections"
+                    ],
+                    "properties": {
+                      "scan_id": {
+                        "title": "Scan ID",
+                        "type": "string"
+                      },
+                      "status": {
+                        "title": "Status",
+                        "type": "string",
+                        "enum": [
+                          "done",
+                          "accepted",
+                          "failed",
+                          "pending",
+                          "created",
+                          "retry"
+                        ]
+                      },
+                      "start_time": {
+                        "title": "Scan Start Time",
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "end_time": {
+                        "title": "Scan End Time",
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "results": {
+                        "title": "Scan Results",
+                        "type": "object",
+                        "properties": {
+                          "md5": {
+                            "type": "string"
+                          },
+                          "sha256": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "subtype": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "tlsh": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true
+                      },
+                      "detections": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request failed due to a client error, with one or more of the following possible causes:\n1. The request required a tenant_id field, which was missing.\n2. The request was malformed syntactically or semantically.\n"
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        }
+      }
+    },
+    "/api/v2/status/{sensor_id}": {
+      "parameters": [
+        {
+          "name": "sensor_id",
+          "required": true,
+          "schema": {
+            "title": "Sensor ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          "in": "path",
+          "example": "123e4567-e89b-12d3-a456-426614174000"
+        },
+        {
+          "in": "header",
+          "name": "X-Correlation-Id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "The unique identifier for the request.",
+          "example": "864e00cb-fb53-4016-97f1-78e2f07f25d3"
+        },
+        {
+          "in": "header",
+          "name": "X-Tenant-Id",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "The unique identifier for the tenant.",
+          "example": "1a618f53-8829-4ab7-b1e4-d4786617e1d0"
+        }
+      ],
+      "get": {
+        "tags": [
+          "v2"
+        ],
+        "summary": "Get Status or Result of a Scan",
+        "operationId": "example_api_v2_sensors_sensor_id_get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "Example V2 Response",
+                      "required": [
+                        "scan_id",
+                        "status",
+                        "start_time",
+                        "end_time",
+                        "results",
+                        "detections"
+                      ],
+                      "properties": {
+                        "scan_id": {
+                          "title": "Scan ID",
+                          "type": "string"
+                        },
+                        "status": {
+                          "title": "Status",
+                          "type": "string",
+                          "enum": [
+                            "done",
+                            "accepted",
+                            "failed",
+                            "pending",
+                            "created",
+                            "retry"
+                          ]
+                        },
+                        "start_time": {
+                          "title": "Scan Start Time",
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "end_time": {
+                          "title": "Scan End Time",
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "results": {
+                          "title": "Scan Results",
+                          "type": "object",
+                          "properties": {
+                            "md5": {
+                              "type": "string"
+                            },
+                            "sha256": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "type": "string"
+                            },
+                            "subtype": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "tlsh": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "detections": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request failed due to a client error, with one or more of the following possible causes:\n1. The request required a tenant_id field, which was missing.\n2. The request was malformed syntactically or semantically.\n"
+          },
+          "404": {
+            "description": "The specified resource was not found."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ScanCreateRequest": {
+        "title": "ScanCreateRequest",
+        "required": [
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "location": {
+            "title": "POSIX Path",
+            "type": "string"
+          }
+        }
+      },
+      "ScanResultsV2": {
+        "title": "Example V2 Response",
+        "required": [
+          "scan_id",
+          "status",
+          "start_time",
+          "end_time",
+          "results",
+          "detections"
+        ],
+        "properties": {
+          "scan_id": {
+            "title": "Scan ID",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string",
+            "enum": [
+              "done",
+              "accepted",
+              "failed",
+              "pending",
+              "created",
+              "retry"
+            ]
+          },
+          "start_time": {
+            "title": "Scan Start Time",
+            "type": "integer",
+            "format": "int64"
+          },
+          "end_time": {
+            "title": "Scan End Time",
+            "type": "integer",
+            "format": "int64"
+          },
+          "results": {
+            "title": "Scan Results",
+            "type": "object",
+            "properties": {
+              "md5": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "subtype": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tlsh": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          },
+          "detections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ScanResultsV1": {
+        "title": "Example V1 Response",
+        "required": [
+          "scan_id",
+          "status",
+          "start_time",
+          "end_time",
+          "results",
+          "detections"
+        ],
+        "properties": {
+          "scan_id": {
+            "title": "Scan ID",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string",
+            "enum": [
+              "done",
+              "accepted",
+              "failed",
+              "pending",
+              "created",
+              "retry"
+            ]
+          },
+          "start_time": {
+            "title": "Scan Start Time",
+            "type": "integer",
+            "format": "int64"
+          },
+          "end_time": {
+            "title": "Scan End Time",
+            "type": "integer",
+            "format": "int64"
+          },
+          "results": {
+            "title": "Scan Results",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "detections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

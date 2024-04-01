@@ -1,0 +1,15 @@
+{
+  "name": "example-issue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deref:json": "node ./tools/dereference-json.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^11.5.4",
+    "node-emoji": "^2.1.3"
+  }
+}
